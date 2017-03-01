@@ -17,7 +17,7 @@ class WebHook(Resource):
 
 		if args.get('hub.mode') == 'subscribe' and args.get('hub.verify_token') == verify_token:
 			print('validating webhook')
-			return args.get('hub.challenge')
+			return args.get('hub.challenge').strip("\n\"")
 		else:
 			print('Failed validation. Make sure the \
 				validation tokens match')
