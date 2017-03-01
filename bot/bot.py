@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import make_response
 from flask_restful import Resource, Api, reqparse
 import os
 
@@ -17,7 +18,7 @@ class WebHook(Resource):
 
 		if args.get('hub.mode') == 'subscribe' and args.get('hub.verify_token') == verify_token:
 			print('validating webhook')
-			return args.get('hub.challenge').strip("\n\"")
+			return make_response(args.get('hub.challenge').strip("\n\""))
 		else:
 			print('Failed validation. Make sure the \
 				validation tokens match')
